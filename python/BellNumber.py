@@ -3,9 +3,9 @@
 
 # noinspection PyDefaultArgument
 def bell_number_or(n, previous=[1]):
-	print n, previous
+	print(n, previous)
 	if len(previous) == n:
-		print "Bell number of ", n, " is ", previous[-1]
+		print ("Bell number of ", n, " is ", previous[-1])
 		return previous[-1]
 	current = [previous[-1]]
 	for x in previous:
