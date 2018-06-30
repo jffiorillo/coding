@@ -1,6 +1,4 @@
-import java.util.*
-
-fun wildcardPatternMatching(string: String, regex1: String, debug: Boolean = false): String {
+private fun wildcardPatternMatching(string: String, regex1: String, debug: Boolean = false): String {
     if (regex1.isEmpty() || string.isEmpty())
         return (regex1.isEmpty() && string.isEmpty()).toString()
     val regex = regex1.cleanRegex()
