@@ -1,9 +1,18 @@
+@file:Suppress("MemberVisibilityCanBePrivate")
+
 package io.tree
 
 import java.util.*
 
 class BreadthFirstSearch : TraversalTree {
-  override fun <T> executeIterative(tree: BinaryTree<T>): List<T> {
+  override fun <T> executeIterative(tree: BinaryTree<T>): List<T> =
+      executeIterativeList(tree).let { result ->
+        println("BreadthFirstSearch.executeIterative  $result")
+        result.flatten()
+      }
+
+
+  fun <T> executeIterativeList(tree: BinaryTree<T>): List<List<T>> {
     val stack = Stack<List<BinaryTree<T>>>()
     val result = mutableListOf<List<T>>()
     stack.push(listOf(tree))
@@ -14,14 +23,13 @@ class BreadthFirstSearch : TraversalTree {
         if (news.isNotEmpty()) stack.push(news)
       }
     }
-    println("BreadthFirstSearch.executeIterative  $result")
-    return result.flatten()
+    return result
   }
 
   override fun <T> executeRecursive(tree: BinaryTree<T>?, values: MutableList<T>): MutableList<T> =
       tree?.let { executeRecursive(listOf(it), mutableListOf()).flatten().toMutableList() } ?: mutableListOf()
 
-  private fun <T> executeRecursive(nodes: List<BinaryTree<T>>, values: MutableList<List<T>>): MutableList<List<T>> = when {
+  fun <T> executeRecursive(nodes: List<BinaryTree<T>>, values: MutableList<List<T>>): MutableList<List<T>> = when {
     nodes.isEmpty() -> values
     else -> executeRecursive(nodes.flatMap { listOfNotNull(it.left, it.right) }, values.also { list -> list.add(nodes.map { it.value }) })
   }

@@ -22,6 +22,18 @@ fun binaryTreeLetters() = listOf(
     )
 )
 
+fun symmetricTree() = listOf(
+    BinaryTree(1,
+        left = BinaryTree(2,
+            left = BinaryTree(3),
+            right = BinaryTree(4)),
+        right = BinaryTree(2,
+            left = BinaryTree(4),
+            right = BinaryTree(3))
+
+    )
+)
+
 fun runTraversalTree(traversalTree: TraversalTree) {
   println("${traversalTree.javaClass}")
   binaryTreeNumbers().map { tree -> run(traversalTree, tree) }
