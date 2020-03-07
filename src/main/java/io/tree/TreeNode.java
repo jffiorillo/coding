@@ -1,4 +1,4 @@
-package io;
+package io.tree;
 
 public class TreeNode {
   int val;
