@@ -1,50 +1,60 @@
 package io.queue
 
-import io.utils.createActorWithResult
-import kotlinx.coroutines.CoroutineScope
 import java.util.*
 import kotlin.collections.HashSet
 
 
 //https://leetcode.com/explore/learn/card/queue-stack/231/practical-application-queue/1375/
 class OpenTheLock {
-
-  private val max = 10
-  private val initial = "0000"
+  private val initial = listOf(0, 0, 0, 0)
   private val error = -1
 
-  fun execute(deadEnds: Array<String>, target: String): Int = when {
-    deadEnds.contains(initial) -> error
-    target == initial -> 0
-    else -> {
-      val stack = Stack<Set<String>>()
-      stack.push(setOf(initial))
-      var steps = 0
-      val visited = HashSet<String>()
-      while (stack.isNotEmpty()) {
-        stack.pop().flatMap { current ->
-          if (current == target) return steps
-          visited.add(current)
-          current.generateNextGeneration(deadEnds, visited)
-        }.let { nextGeneration -> if (nextGeneration.isNotEmpty()) stack.add(nextGeneration.toSet()) }
-        steps += 1
+  fun execute(deadEnds: Array<String>, goal: String): Int {
+    val start = initial
+    val target = goal.lockArrayListOfInt()
+    val avoid = deadEnds.map { it.lockArrayListOfInt() }.toSet()
+
+    if (start in avoid)
+      return error
+
+    var distance = 0
+    var toVisit = listOf(start)
+    val visited = HashSet<List<Int>>()
+
+    while (toVisit.isNotEmpty()) {
+      val nextToVisit = mutableListOf<List<Int>>()
+
+      for (node in toVisit) {
+        if (node == target)
+          return distance
+
+        for (n in retrieveNeighbours(node)) {
+          if (n !in visited && n !in avoid) {
+            visited.add(n)
+            nextToVisit.add(n)
+          }
+        }
       }
-      error
+
+      toVisit = nextToVisit
+      distance += 1
     }
+
+    return error
   }
 
-  fun String.generateNextGeneration(deadEnds: Array<String>, visited: HashSet<String>): List<String> = this.mapIndexed { index, char ->
-    char.toString().toInt().generateNextNumbers().map { newValue ->
-      this.repeat(1).replaceRange(index, kotlin.math.min(index + 1, 4), newValue.toString())
+  private fun retrieveNeighbours(current: List<Int>) = arrayListOf<List<Int>>().apply {
+    (0..3).map { i ->
+      val next = ArrayList(current)
+      next[i] = (current[i] + 1) % 10
+      add(ArrayList(next))
+      next[i] = (current[i] + 9) % 10
+      add(next)
     }
-  }.flatten().filter { !deadEnds.contains(it) && !visited.contains(it) }
-
-
-  private fun Int.generateNextNumbers() = when (this) {
-    0 -> listOf(9, 1)
-    else -> listOf((this + 1).rem(max), this - 1)
   }
+  private fun String.lockArrayListOfInt() = (0..3).map { Character.getNumericValue(this[it]) }
 }
+
 
 fun main() {
   val openTheLock = OpenTheLock()
@@ -53,7 +63,7 @@ fun main() {
       Help(deadEnds = arrayOf("8888"), target = "0009", output = 1),
       Help(deadEnds = arrayOf("8887", "8889", "8878", "8898", "8788", "8988", "7888", "9888"), target = "8888", output = -1)
   ).mapIndexed { index, item ->
-    val output = openTheLock.execute(deadEnds = item.deadEnds, target = item.target)
+    val output = openTheLock.execute(deadEnds = item.deadEnds, goal = item.target)
     if (output != item.output) {
       println("error with $item wrong output $output")
     } else println("done with $index")
