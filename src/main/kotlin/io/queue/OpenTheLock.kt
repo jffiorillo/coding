@@ -17,19 +17,16 @@ class OpenTheLock {
     deadEnds.contains(initial) -> error
     target == initial -> 0
     else -> {
-      val stack = Stack<List<String>>()
-      stack.push(listOf(initial))
+      val stack = Stack<Set<String>>()
+      stack.push(setOf(initial))
       var steps = 0
       val visited = HashSet<String>()
       while (stack.isNotEmpty()) {
-//        createActorWithResult(stack.pop()){receiveChannel, sendChannel ->
-//
-//        }
         stack.pop().flatMap { current ->
           if (current == target) return steps
           visited.add(current)
           current.generateNextGeneration(deadEnds, visited)
-        }.let { nextGeneration -> stack.add(nextGeneration) }
+        }.let { nextGeneration -> if (nextGeneration.isNotEmpty()) stack.add(nextGeneration.toSet()) }
         steps += 1
       }
       error
@@ -56,7 +53,7 @@ fun main() {
       Help(deadEnds = arrayOf("8888"), target = "0009", output = 1),
       Help(deadEnds = arrayOf("8887", "8889", "8878", "8898", "8788", "8988", "7888", "9888"), target = "8888", output = -1)
   ).mapIndexed { index, item ->
-    val output = openTheLock.execute(item.deadEnds, item.target)
+    val output = openTheLock.execute(deadEnds = item.deadEnds, target = item.target)
     if (output != item.output) {
       println("error with $item wrong output $output")
     } else println("done with $index")
