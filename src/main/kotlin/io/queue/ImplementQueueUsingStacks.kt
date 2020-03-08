@@ -13,25 +13,23 @@ class ImplementQueueUsingStacks {
 
   /** Removes the element from in front of queue and returns that element. */
   fun pop(): Int {
-    val tempArray = IntArray(stack.size - 1)
-    var index = tempArray.size
-    while (index != 0) {
-      tempArray[index - 1] = stack.pop()
-      index--
-    }
+    val tempArray = generateArray()
     return stack.pop().also {
       tempArray.forEach { stack.push(it) }
     }
   }
 
-  /** Get the front element. */
-  fun peek(): Int {
-    val tempArray = IntArray(stack.size - 1)
+  private fun generateArray() = IntArray(stack.size - 1).also { tempArray ->
     var index = tempArray.size
     while (index != 0) {
       tempArray[index - 1] = stack.pop()
       index--
     }
+  }
+
+  /** Get the front element. */
+  fun peek(): Int {
+    val tempArray = generateArray()
     return stack.pop().also { lastElement ->
       stack.push(lastElement)
       tempArray.forEach { stack.push(it) }
