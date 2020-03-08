@@ -45,7 +45,7 @@ class NumberOfIslands {
   }
 }
 
-private data class Coordinates(val i: Int, val j: Int) {
+data class Coordinates(val i: Int, val j: Int) {
 
   fun generateChild(maxI: Int, maxJ: Int) =
       mutableListOf<Coordinates>().apply {
@@ -67,16 +67,16 @@ private data class Coordinates(val i: Int, val j: Int) {
 fun main() {
   val numberOfIslands = NumberOfIslands()
   listOf(
-//      arrayOf(
-//          "11110",
-//          "11010",
-//          "11000",
-//          "00000"),
-//      arrayOf(
-//          "11000",
-//          "11000",
-//          "00100",
-//          "00011"),
+      arrayOf(
+          "11110",
+          "11010",
+          "11000",
+          "00000"),
+      arrayOf(
+          "11000",
+          "11000",
+          "00100",
+          "00011"),
       arrayOf(
           "111",
           "010",
