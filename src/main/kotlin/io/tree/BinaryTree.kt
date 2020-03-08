@@ -1,6 +1,6 @@
 package io.tree
 
-data class BinaryTree<T>(val value: T, val left: BinaryTree<T>? = null, val right: BinaryTree<T>? = null)
+data class BinaryTree<T>(val value: T, var left: BinaryTree<T>? = null, var right: BinaryTree<T>? = null)
 
 fun binaryTreeNumbers() = listOf(
     BinaryTree(1, right = BinaryTree(2, left = BinaryTree(3))),
