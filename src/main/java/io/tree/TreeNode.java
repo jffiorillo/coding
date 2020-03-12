@@ -1,6 +1,6 @@
 package io.tree;
 
-public class TreeNode {
+class TreeNode {
   public int val;
   public TreeNode left;
   public TreeNode right;
