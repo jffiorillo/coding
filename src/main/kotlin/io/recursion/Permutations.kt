@@ -1,5 +1,6 @@
 package io.recursion
 
+//https://leetcode.com/explore/learn/card/recursion-ii/507/beyond-recursion/2903/
 class Permutations {
 
   fun execute(input: List<Int>): List<MutableList<Int>> = when {
