@@ -12,9 +12,9 @@ class ReverseString {
     else -> {}
   }
 
-  fun helper(s: CharArray, left: Int, right: Int) {
-    var left = left
-    var right = right
+  fun helper(s: CharArray, l: Int, r: Int) {
+    var left = l
+    var right = r
     if (left >= right) return
     val tmp = s[left]
     s[left++] = s[right]
