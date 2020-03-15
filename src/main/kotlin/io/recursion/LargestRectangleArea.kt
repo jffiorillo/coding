@@ -2,6 +2,33 @@ package io.recursion
 
 class LargestRectangleArea {
 
+
+  fun executeAnotherApproach(heights: IntArray): Int {
+    var maxArea = 0
+    for(i in heights.indices) {
+      val current = heights[i]
+      var j = i
+      while(j - 1 >= 0) {
+        if(heights[j - 1] > current) {
+          j--
+        } else {
+          break
+        }
+      }
+      var k = i
+      while(k + 1 < heights.size) {
+        if(heights[k + 1] >= current) {
+          k++
+        } else {
+          break
+        }
+      }
+      val area = current * (k - j + 1)
+      maxArea = maxOf(maxArea, area)
+    }
+    return maxArea
+  }
+
   fun execute(heights: IntArray): Int = when {
     heights.max() == null || heights.max() == 0 -> 0
     heights.max() == Int.MAX_VALUE -> Int.MAX_VALUE
@@ -37,8 +64,8 @@ class LargestRectangleArea {
 fun main() {
   val largestRectangleArea = LargestRectangleArea()
   listOf(
-      intArrayOf(5,4,1,2),
-      intArrayOf(1,1),
+      intArrayOf(5, 4, 1, 2),
+      intArrayOf(1, 1),
       intArrayOf(2, 1, 5, 6, 2, 3),
       intArrayOf(9046155, 17522430, 44186957, 40374643, 77652689, 89027934, 97586333, 68834337, 62979669, 1783127, 29339118, 83907628,
           48067922, 22843915, 11027247, 73603247, 32376863, 12448072, 7086475, 2369889, 5064817, 88893600, 61558880, 77108330,
