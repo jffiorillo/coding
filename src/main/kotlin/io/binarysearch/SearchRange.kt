@@ -2,48 +2,25 @@ package io.binarysearch
 
 // https://leetcode.com/explore/learn/card/binary-search/135/template-iii/944/
 class SearchRange {
-  fun execute(nums: IntArray, target: Int): IntArray = when {
-    nums.size == 0 -> intArrayOf(-1, -1)
-    else -> {
-      var start = 0
-      var end = nums.size
-      var index = -1
-      while (start <= end && start < nums.size) {
-        val pivot = start + (end - start) / 2
-        if (nums[pivot] == target) {
-          index = pivot
-          break
-        } else if (nums[pivot] < target) {
-          start = pivot + 1
-        } else end = pivot - 1
+  fun execute(nums: IntArray, target: Int): IntArray = intArrayOf(find(nums, target) { it < target }, find(nums, target) { it <= target })
+
+  private fun find(nums: IntArray, target: Int, evaluator: (Int) -> Boolean): Int {
+    var index = -1
+    var start = 0
+    var end = nums.lastIndex
+
+    while (start <= end) {
+      val mid = start + (end - start) / 2
+
+      if (nums[mid] == target) index = mid
+
+      if (evaluator(nums[mid])) {
+        start = mid + 1
+      } else {
+        end = mid - 1
       }
-      if (index == -1)
-        intArrayOf(-1, -1)
-      else intArrayOf(searchNumbers(nums, right = index, condition = { value -> value == target }),
-          searchNumbersRight(nums, target, index))
     }
-  }
-
-  fun searchNumbers(nums: IntArray, left: Int = 0, right: Int = nums.size - 1, condition: (Int) -> Boolean): Int {
-    var start = left
-    var end = right
-    while (start < end) {
-      val pivot = start + (end - start) / 2
-      if (condition(nums[pivot])) end = pivot
-      else start = pivot + 1
-    }
-    return start
-  }
-
-  fun searchNumbersRight(nums: IntArray, target: Int, left: Int): Int {
-    var start = left
-    var end = nums.size - 1
-    while (start < end) {
-      val pivot = 1 + start + (end - start) / 2
-      if (nums[pivot] != target) end = pivot - 1
-      else start = pivot
-    }
-    return start
+    return index
   }
 }
 
