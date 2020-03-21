@@ -25,11 +25,5 @@ class Pow {
 
 
 fun main() {
-//  val pow = Pow()
-//  listOf(Pair(1.00000, Int.MAX_VALUE), Pair(0.00001, Int.MAX_VALUE)).map { (x, n) ->
-//    println("${pow.executeIterative(x, n)}")
-//  }
-
   println("${2.0.pow(Int.MIN_VALUE.toDouble())}")
-
 }
