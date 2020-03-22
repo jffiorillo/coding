@@ -7,7 +7,18 @@ import java.util.Collections;
 import java.util.LinkedList;
 import java.util.List;
 
+// https://leetcode.com/explore/learn/card/n-ary-tree/130/traversal/925/
 class PreOrderTraversalNTree {
+
+  public static final Node INPUT = new Node(1,
+      new ArrayList<>(
+          Arrays.asList(
+              new Node(3, new ArrayList<>(Arrays.asList(new Node(5), new Node(6)))),
+              new Node(2),
+              new Node((4))
+          )
+      )
+  );
 
   public List<Integer> executeIterative(Node root) {
     LinkedList<Node> stack = new LinkedList<>();
@@ -37,16 +48,7 @@ class PreOrderTraversalNTree {
 
   public static void main(String[] args) {
     final PreOrderTraversalNTree preOrderTraversalNTree = new PreOrderTraversalNTree();
-    Node input = new Node(1,
-        new ArrayList<>(
-            Arrays.asList(
-                new Node(3, new ArrayList<>(Arrays.asList(new Node(5), new Node(6)))),
-                new Node(2),
-                new Node((4))
-            )
-        )
-    );
-    final List<Integer> output = preOrderTraversalNTree.executeRecursive(input);
+    final List<Integer> output = preOrderTraversalNTree.executeRecursive(INPUT);
     System.out.println("output = " + output);
   }
 }

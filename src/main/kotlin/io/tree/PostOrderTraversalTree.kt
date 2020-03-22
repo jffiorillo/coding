@@ -5,7 +5,6 @@ import java.util.*
 //https://leetcode.com/explore/learn/card/data-structure-tree/134/traverse-a-tree/930/
 class PostOrderTraversalTree : TraversalTree {
   override fun <T> executeIterative(tree: BinaryTree<T>): List<T> {
-    //    val result = mutableListOf<T>()
     val firstStack = Stack<BinaryTree<T>>()
     val secondStack = Stack<T>()
     firstStack.push(tree)
