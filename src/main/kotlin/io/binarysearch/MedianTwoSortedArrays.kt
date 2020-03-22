@@ -21,8 +21,7 @@ class MedianTwoSortedArrays {
       } else if (i > iMin && smallInput[i - 1] > largeInput[j]) {
         iMax = i - 1 // i is too big
       } else { // i is perfect
-        var maxLeft = 0
-        maxLeft = when {
+        val maxLeft = when {
           i == 0 -> largeInput[j - 1]
           j == 0 -> smallInput[i - 1]
           else -> max(smallInput[i - 1], largeInput[j - 1])
