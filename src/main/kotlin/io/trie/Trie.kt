@@ -4,22 +4,7 @@ package io.trie
 // https://leetcode.com/explore/learn/card/trie/147/basic-operations/1047/
 class Trie {
 
-  private data class TrieNode(
-      val value: Char?,
-      val path: String,
-      var finishWord: Boolean = false,
-      val children: MutableList<TrieNode> = mutableListOf()) {
-    fun add(child: TrieNode) = children.add(child)
-
-    fun getOrAdd(char: Char, finishWord: Boolean = false) = children.firstOrNull { it.value == char }?.also {
-      it.finishWord = it.finishWord || finishWord
-    }
-        ?: TrieNode(char, this.path + char, finishWord).also { children.add(it) }
-
-    fun getOrNull(char: Char) = children.firstOrNull { it.value == char }
-  }
-
-  private val root = TrieNode(null, "")
+  private val root = TrieNode.root()
 
 
   /** Inserts a word into the trie. */
