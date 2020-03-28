@@ -3,6 +3,7 @@ package io.recursion
 import io.models.ListNode
 
 // https://leetcode.com/explore/featured/card/recursion-i/251/scenario-i-recurrence-relation/2378/
+// https://leetcode.com/explore/learn/card/linked-list/219/classic-problems/1205/
 class ReverseLinkedList {
 
   fun executeRecursive(head: ListNode?): ListNode? = when (head?.next) {
