@@ -1,10 +1,10 @@
 package io.linkedlist
 
+import io.models.ListNode
+
 // https://leetcode.com/explore/learn/card/linked-list/214/two-pointer-technique/1212/
 // https://leetcode.com/explore/learn/card/linked-list/214/two-pointer-technique/1214/
 class LinkedListHasCycle {
-
-  data class ListNode(var `val`: Int, var next: ListNode? = null)
 
   fun execute(head: ListNode?): Boolean {
     var faster: ListNode? = head?.next
@@ -19,7 +19,7 @@ class LinkedListHasCycle {
   }
 
 
-  fun getListNodeCycle(head:ListNode?): ListNode? {
+  fun getListNodeCycle(head: ListNode?): ListNode? {
     var faster: ListNode? = head
     var slower: ListNode? = head
     while (faster != null){

@@ -1,7 +1,6 @@
 package io.recursion
 
-import java.util.*
-import java.util.spi.CurrencyNameProvider
+import io.models.ListNode
 
 // https://leetcode.com/explore/featured/card/recursion-i/251/scenario-i-recurrence-relation/2378/
 class ReverseLinkedList {
