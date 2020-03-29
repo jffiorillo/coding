@@ -5,19 +5,7 @@ class SlidesWindowMaximum {
 
   fun execute(nums: IntArray, k: Int): IntArray = when (k) {
     1 -> nums
-    else -> {
-      val result = mutableListOf<Int>()
-      for (i in 0..nums.size - k) {
-        var inner = i + 1
-        var currentMax = nums[inner-1]
-        while (inner < k + i) {
-          currentMax = maxOf(currentMax, nums[inner])
-          inner++
-        }
-        result.add(currentMax)
-      }
-      result.toIntArray()
-    }
+    else -> (0..nums.size - k).map { nums.slice(it until it+k).max()!! }.toIntArray()
   }
 }
 
