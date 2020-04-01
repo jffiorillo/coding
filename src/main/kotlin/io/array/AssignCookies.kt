@@ -6,40 +6,19 @@ class AssignCookies {
   fun findContentChildren(greedFactor: IntArray, cookiesSide: IntArray) = execute(greedFactor, cookiesSide)
   fun execute(greedFactor: IntArray, cookiesSide: IntArray): Int {
     greedFactor.sort()
-    val greedFactorList = greedFactor.toMutableList()
     cookiesSide.sort()
-    return cookiesSide.map { cookie -> greedFactorList.findChildIndex(cookie)?.also { greedFactorList.removeAt(it) } }.filterNotNull().size
-  }
-}
-
-private fun List<Int>.findChildIndex(input: Int): Int? {
-  var start = 0
-  var end = size
-  loop@ while (start < end) {
-    val pivot = start + (end - start) / 2
-    val value = this[pivot]
-    when {
-      value == input || value < input && pivot + 1 < size && this[pivot + 1] > input -> {
-        start = pivot
-        break@loop
-      }
-      value < input -> start = pivot + 1
-      else -> end = pivot
-    }
-  }
-  return when {
-    isEmpty() -> null
-    start < size && this[start] <= input -> start
-    input > last() -> size -1
-    else -> null
+    var g = 0
+    return cookiesSide.filter { cookie ->
+      (g < greedFactor.size && cookie >= greedFactor[g]).also { if (it) g++ }
+    }.size
   }
 }
 
 fun main() {
   val assignCookies = AssignCookies()
-//  println(intArrayOf(1, 1,1,2,2,2,2,2,2, 3, 3,3,3,4,4,4,6, 7, 10).findChildIndex(5))
   listOf(
       Triple(intArrayOf(10, 9, 8, 7, 10, 9, 8, 7), intArrayOf(10, 9, 8, 7), 4),
+      Triple(intArrayOf(1, 2, 3), intArrayOf(1, 1), 1),
       Triple(
           intArrayOf(262, 437, 433, 102, 438, 346, 131, 160, 281, 34, 219, 373, 466, 275, 51, 118, 209, 32, 108, 57, 385, 514, 439, 73, 271,
               442, 366, 515, 284, 425, 491, 466, 322, 34, 484, 231, 450, 355, 106, 279, 496, 312, 96, 461, 446, 422, 143, 98, 444, 461, 142,
