@@ -29,5 +29,5 @@ fun main() {
       Triple(intArrayOf(1, Int.MAX_VALUE), 2, 2),
       Triple(intArrayOf(186, 419, 83, 408), 6249, 20)
   ))
-  { (coins, amount, value) -> coinChange.execute(coins, amount).let { Triple(it == value, value, it) } }
+  { (coins, amount, value) -> Pair(value, coinChange.execute(coins, amount)) }
 }
