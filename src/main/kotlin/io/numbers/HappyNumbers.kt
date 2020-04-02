@@ -10,18 +10,15 @@ class HappyNumbers {
     var current = n
     val visited = hashSetOf<Int>()
     while (current > 1) {
-      var temp = current
       if (visited.contains(current)) break
       visited.add(current)
-      current = 0
-      while (temp > 0) {
-        current += temp.rem(10).toDouble().pow(2).toInt()
-        temp /= 10
-      }
+      current = current.squareSumOfNumber()
     }
     return current == 1
   }
 }
+
+private fun Int.squareSumOfNumber() = (intArrayOf(0)+this).reduce { acc, value ->  acc + value*value }
 
 fun main() {
   val happyNumbers = HappyNumbers()
