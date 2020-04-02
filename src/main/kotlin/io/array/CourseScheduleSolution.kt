@@ -1,7 +1,5 @@
 package io.array
 
-import java.util.*
-
 
 // https://leetcode.com/problems/course-schedule-iii/solution/
 class CourseScheduleSolution {
@@ -15,17 +13,22 @@ class CourseScheduleSolution {
         count++
         time += duration
       } else {
-        var maxRow = index
-        (0 until index).forEach { j ->
-          if (courses[j].duration() > courses[maxRow].duration()) maxRow = j
-        }
-        if (courses[maxRow].duration() > duration) {
-          time += duration - courses[maxRow].duration()
-        }
-        courses[maxRow][0] = -1
+        tryToChangePreviousLongerCourse(courses, index, duration)?.let { time += it }
       }
     }
     return count
+  }
+
+  private fun tryToChangePreviousLongerCourse(courses: Array<IntArray>, index: Int, duration: Int): Int? {
+    var longestCourse = index
+    (0 until index).forEach { j ->
+      if (courses[j].duration() > courses[longestCourse].duration())
+        longestCourse = j
+    }
+    return courses[longestCourse].duration().let { longestDuration ->
+      courses[longestCourse][0] = -1
+      if (longestDuration > duration) (duration - longestDuration) else null
+    }
   }
 
   private fun IntArray.duration() = this.first()
