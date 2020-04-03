@@ -7,6 +7,16 @@ class MaxSumArray {
   fun execute(input: IntArray): Int =
       if (input.all { it <0 }) input.max()?:0 else
         input.fold(Int.MIN_VALUE to 0){acc, value -> maxOf((acc.second + value),0).let { sum  -> maxOf(acc.first, sum) to sum } }.first
+
+  fun executeDP(nums: IntArray): Int {
+    val dp = IntArray(nums.size){nums[it]}
+    var max = dp[0]
+    for (i in 1 until nums.size) {
+      if (dp[i - 1] > 0) dp[i] = dp[i] + dp[i - 1]
+      if (dp[i] > max) max = dp[i]
+    }
+    return max
+  }
 }
 
 fun main(){
