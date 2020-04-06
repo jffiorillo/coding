@@ -12,7 +12,8 @@ fun <INPUT, VALUE, OUTPUT> runTests(
     if (evaluation(value, output)) {
       println("index $index output ${outputString(output)} is valid")
     } else {
-      println("index $index Expected ${valueString(value)} but instead got ${outputString(output)}")
+      println("index $index Expected ${valueString(value)}")
+      println(" but instead got ${outputString(output)}")
     }
 
   }
