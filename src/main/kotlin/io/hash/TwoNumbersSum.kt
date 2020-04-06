@@ -6,22 +6,22 @@ import io.utils.runTests
 class TwoNumbersSum {
 
   fun execute(input: IntArray, target: Int): IntArray {
-    val inputIndexed = input.mapIndexed { index, value -> index to value }
-    val map = input.toSet().map { value -> value to inputIndexed.filter { it.second == target - value } }.toMap()
-    return inputIndexed
-        .first { (index, item) -> map.getValue(item).any { (iIndex, value) -> index != iIndex && map.containsKey(value) } }.second
-        .let { result ->
-          map.getValue(result).first().let { (index, rest) ->
-            intArrayOf(index, map.getValue(rest).first { (iIndex, value) -> index != iIndex && map.containsKey(value) }.first)
-          }
-        }
+    val map = mutableMapOf<Int, Int>()
+    input.forEachIndexed { index, value ->
+      val left = target - value
+      if (map.contains(left)) {
+        return intArrayOf(index, map.getValue(left))
+      }
+      map[value] = index
+    }
+    throw IllegalArgumentException("No two sum solution")
   }
 }
 
 fun main() {
   runTests(listOf(
       Triple(intArrayOf(3, 3), 6, intArrayOf(0, 1))
-  ), evaluation = { a, b -> a.toList() == b.toList() }
+  ), evaluation = { a, b -> a.toSet() == b.toSet() }
       , valueString = { it.toList().toString() }
       , outputString = { it.toList().toString() }
   ) { (input, target, value) -> value to TwoNumbersSum().execute(input, target) }
