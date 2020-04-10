@@ -10,7 +10,7 @@ fun <INPUT, VALUE, OUTPUT> runTests(
   values.forEachIndexed { index, input ->
     val (value, output) = execution(input)
     if (evaluation(value, output)) {
-      println("index $index output ${outputString(output)} is valid")
+      println("Valid: index $index output ${outputString(output)}")
     } else {
       println("index $index Expected ${valueString(value)}")
       println(" but instead got ${outputString(output)}")
