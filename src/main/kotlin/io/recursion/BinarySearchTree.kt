@@ -1,6 +1,6 @@
 package io.recursion
 
-import io.TreeNode
+import io.models.TreeNode
 
 //https://leetcode.com/explore/featured/card/recursion-i/251/scenario-i-recurrence-relation/3233/
 class BinarySearchTree {

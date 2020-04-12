@@ -1,8 +1,6 @@
 package io.recursion
 
-import io.TreeNode
-import kotlin.math.max
-import kotlin.math.min
+import io.models.TreeNode
 
 // https://leetcode.com/explore/learn/card/recursion-ii/470/divide-and-conquer/2874/
 class ValidateBinarySearchTree {

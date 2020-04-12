@@ -1,6 +1,6 @@
 package io.tree
 
-import io.TreeNode
+import io.models.TreeNode
 import io.utils.runTests
 import java.util.*
 

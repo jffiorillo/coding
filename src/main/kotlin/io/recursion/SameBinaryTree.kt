@@ -1,6 +1,6 @@
 package io.recursion
 
-import io.TreeNode
+import io.models.TreeNode
 import java.util.*
 
 class SameBinaryTree {

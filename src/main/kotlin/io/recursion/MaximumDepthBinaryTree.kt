@@ -1,6 +1,6 @@
 package io.recursion
 
-import io.TreeNode
+import io.models.TreeNode
 import kotlin.math.max
 
 //https://leetcode.com/explore/featured/card/recursion-i/256/complexity-analysis/2375/

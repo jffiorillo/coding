@@ -1,6 +1,6 @@
 package io.binarysearch
 
-import io.TreeNode
+import io.models.TreeNode
 
 
 // https://leetcode.com/problems/all-elements-in-two-binary-search-trees/

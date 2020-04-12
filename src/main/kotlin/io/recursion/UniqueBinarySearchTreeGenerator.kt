@@ -1,6 +1,6 @@
 package io.recursion
 
-import io.TreeNode
+import io.models.TreeNode
 
 //https://leetcode.com/explore/featured/card/recursion-i/253/conclusion/2384/
 
