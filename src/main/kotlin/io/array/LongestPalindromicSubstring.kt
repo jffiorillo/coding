@@ -4,6 +4,41 @@ import io.utils.runTests
 
 class LongestPalindromicSubstring {
 
+  fun executeManacher(input: String): String {
+    if (input.isEmpty()) return ""
+    val preprocessManacher = preprocessManacher(input)
+    val weights = IntArray(preprocessManacher.length) { 0 }
+
+    var center = 0
+    var rightBoundary = 0
+    (1 until preprocessManacher.length - 1).forEach { index ->
+      val mirror = 2 * center - index
+      if (index < rightBoundary)
+        weights[index] = minOf(rightBoundary - index, weights[mirror])
+
+      while (preprocessManacher[index + (1 + weights[index])] == preprocessManacher[index - (1 + weights[index])]) {
+        weights[index]++
+      }
+
+      if (index + weights[index] > rightBoundary) {
+        rightBoundary = index + weights[index]
+        center = index
+      }
+    }
+
+    return cleanSolution(preprocessManacher, weights)
+  }
+
+  private fun cleanSolution(input: String, weights: IntArray) =
+      weights
+          .foldIndexed(0 to 0) { index, (center, size), value ->
+            if (value > size) {
+              index to value
+            } else center to size
+          }.let { (center, size) -> input.substring(center - size..center + size).replace("#", "") }
+
+  private fun preprocessManacher(input: String) = "^$input$".toList().joinToString(separator = "#") { it.toString() }
+
   fun execute(input: String): String = when (input.length) {
     0, 1 -> input
     else -> {
@@ -17,7 +52,7 @@ class LongestPalindromicSubstring {
       }
       palindromes.addAll((1 until input.length).fold(mutableListOf()) { acc, value ->
         acc.apply {
-          if (input.isPalindrome(value-1,value)) {
+          if (input.isPalindrome(value - 1, value)) {
             add(value - 1 to value)
           }
         }
@@ -66,5 +101,5 @@ fun main() {
       "ac" to "a",
       "aaaa" to "aaaa",
       "tattarrattat" to "tattarrattat"
-  )) { (input, value) -> value to LongestPalindromicSubstring().execute(input) }
+  )) { (input, value) -> value to LongestPalindromicSubstring().executeManacher(input) }
 }
