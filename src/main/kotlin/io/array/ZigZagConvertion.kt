@@ -5,7 +5,7 @@ import io.utils.runTests
 // https://leetcode.com/problems/zigzag-conversion/
 class ZigZagConversation {
 
-  fun convert(input: String, nRows: Int): String? {
+  fun execute(input: String, nRows: Int): String? {
     val result = Array(nRows) { StringBuffer() }
     var index = 0
     while (index < input.length) {
@@ -29,5 +29,5 @@ fun main() {
       Triple("PAYPALISHIRING", 3, "PAHNAPLSIIGYIR"),
       Triple("PAYPALISHIRING", 4, "PINALSIGYAHRPI"),
       Triple("PAYPALISHIRING", 8, "PINALSIGYAHRPI")
-  )) { (input, nRows, value) -> value to ZigZagConversation().convert(input, nRows) }
+  )) { (input, nRows, value) -> value to ZigZagConversation().execute(input, nRows) }
 }
