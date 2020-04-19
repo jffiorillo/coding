@@ -1,7 +1,6 @@
 package io.math
 
 import io.utils.runTests
-import java.util.*
 
 
 // https://leetcode.com/problems/3sum/
@@ -13,20 +12,20 @@ class SumOf3Numbers {
     for (index in 0 until input.size - 2) {
       if (input[index] > 0) break
       if (index > 0 && input[index] == input[index - 1]) continue
-      var lo = index + 1
-      var hi = input.size - 1
+      var low = index + 1
+      var high = input.size - 1
       val sum = -input[index]
-      while (lo < hi) {
+      while (low < high) {
         when {
-          input[lo] + input[hi] == sum -> {
-            result.add(listOf(input[index], input[lo], input[hi]))
-            while (lo < hi && input[lo] == input[lo + 1]) lo++
-            while (lo < hi && input[hi] == input[hi - 1]) hi--
-            lo++
-            hi--
+          input[low] + input[high] == sum -> {
+            result.add(listOf(input[index], input[low], input[high]))
+            while (low < high && input[low] == input[low + 1]) low++
+            while (low < high && input[high] == input[high - 1]) high--
+            low++
+            high--
           }
-          input[lo] + input[hi] < sum -> lo++
-          else -> hi--
+          input[low] + input[high] < sum -> low++
+          else -> high--
         }
       }
     }
