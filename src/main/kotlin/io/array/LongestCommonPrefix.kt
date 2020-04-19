@@ -16,8 +16,32 @@ class LongestCommonPrefix {
     }
     return commonPrefix
   }
+
+  fun executeWithTree(input: Array<String>): String {
+    val root = Trie()
+    input.forEach { root.insert(it) }
+    var current = root
+    var result = ""
+    while (true) {
+      current.value?.let { result += it }
+      if (current.finishWord || current.children.size != 1) break
+      current = current.children.first()
+    }
+    return result
+  }
+
+  data class Trie(val value: Char? = null, val children: MutableList<Trie> = mutableListOf(), var finishWord:Boolean = false) {
+    fun insert(value: String) {
+      value.fold(this) { current, char ->
+        current.children.firstOrNull { it.value == char } ?: Trie(char).also { current.children.add(it) }
+      }.finishWord = true
+    }
+  }
 }
 
 fun main() {
-  runTests(listOf((listOf("hello", "he", "hell") to "he"))) { (input, value) -> value to LongestCommonPrefix().execute(input.toTypedArray()) }
+  runTests(listOf(
+      listOf("hello", "he", "hell") to "he",
+      listOf("flower","flow","flight") to "fl"
+  )) { (input, value) -> value to LongestCommonPrefix().executeWithTree(input.toTypedArray()) }
 }
