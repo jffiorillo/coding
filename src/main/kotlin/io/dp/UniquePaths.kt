@@ -14,7 +14,7 @@ class UniquePaths {
         dp[r][c] = dp[r - 1][c] + dp[r][c - 1]
       }
     }
-    return dp[row - 1][col - 1]
+    return dp.last().last()
   }
 }
 
