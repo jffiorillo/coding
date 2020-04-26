@@ -9,15 +9,13 @@ class ClimbingDoubleSteps {
     0 -> 0
     else -> {
       var n2 = 1
-      var n1 = 1
-      var currentMax = 1
+      var result = 1
       repeat(stairs - 1) {
-        val currentVal = n2 + n1
-        n2 = n1
-        n1 = currentVal
-        currentMax = currentVal
+        val currentVal = n2 + result
+        n2 = result
+        result = currentVal
       }
-      currentMax
+      result
     }
   }
 }
