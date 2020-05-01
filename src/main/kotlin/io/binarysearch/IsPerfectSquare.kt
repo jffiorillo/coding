@@ -14,7 +14,7 @@ class IsPerfectSquare {
       var result = false
       while (start <= end && !result) {
         val pivot = start + (end - start) / 2
-        val value = pivot*pivot
+        val value = pivot * pivot
         println("$start $end $pivot $value")
         when {
           value == input -> {
@@ -33,13 +33,13 @@ class IsPerfectSquare {
   }
 }
 
-fun main(){
+fun main() {
   val isPerfectSquare = IsPerfectSquare()
   listOf(
 //      808201 to true,
 //      2147483647 to false,
       2147395600 to true
-  ).map { (input,result) ->
+  ).map { (input, _) ->
     val output = isPerfectSquare.execute(input)
     println(output)
     println(sqrt(input.toDouble()))

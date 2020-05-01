@@ -4,8 +4,8 @@ package io.matrix
 class ToeplitzMatrix {
 
   fun execute(matrix: Array<IntArray>): Boolean {
-    var row = matrix.size-2
-    while(row > 0){
+    var row = matrix.size - 2
+    while (row > 0) {
       var col = 1
       var tempRow = row + 1
       val value = matrix[row][0]
@@ -19,7 +19,7 @@ class ToeplitzMatrix {
       row--
     }
     matrix[0].indices.forEach { col ->
-      var row = 1
+      row = 1
       var tempCol = col + 1
       val value = matrix[0][col]
       while (tempCol < matrix[0].size && row < matrix.size) {

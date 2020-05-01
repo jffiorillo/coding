@@ -5,30 +5,19 @@ import io.utils.runTests
 // https://leetcode.com/problems/uncrossed-lines/
 class UncrossedLines {
 
-
-  fun execute1(input0: IntArray, input1: IntArray): Int =
-      Array(input0.size+1) { IntArray(input1.size+1) }.let { dp ->
-        for (i in 1..input0.size)
-          for (j in 1..input1.size)
-            if (input0[i-1] == input1[j-1]) dp[i][j] = 1 + dp[i - 1][j - 1]
-            else dp[i][j] = maxOf(dp[i][j - 1], dp[i - 1][j])
-        dp[input0.size][input1.size]
-      }
-
-  fun execute(input0: IntArray, input1: IntArray): Int = maxLines(input0, input1)
-
-  private fun maxLines(
-      input0: IntArray,
-      input1: IntArray,
+  fun execute(
+      initial: IntArray,
+      goal: IntArray,
       index0: Int = 0,
       index1: Int = 0,
-      dp: Array<IntArray> = Array(input0.size) { IntArray(input1.size) { -1 } }
+      dp: Array<IntArray> = Array(initial.size) { IntArray(goal.size) { -1 } }
   ): Int = when {
-    index0 == input0.size || index1 == input1.size -> 0
+    index0 == initial.size || index1 == goal.size -> 0
     dp[index0][index1] >= 0 -> dp[index0][index1]
     else -> {
-      val max = if (input0[index0] == input1[index1]) maxLines(input0, input1, index0 + 1, index1 + 1, dp) + 1 else 0
-      maxOf(max, maxLines(input0, input1, index0 + 1, index1, dp), maxLines(input0, input1, index0, index1 + 1, dp)).also { dp[index0][index1] = it }
+      val max = if (initial[index0] == goal[index1]) execute(initial, goal, index0 + 1, index1 + 1, dp) + 1 else 0
+      maxOf(max, execute(initial, goal, index0 + 1, index1, dp), execute(initial, goal, index0, index1 + 1, dp))
+          .also { dp[index0][index1] = it }
     }
   }
 }
