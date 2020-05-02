@@ -3,6 +3,7 @@ package io.tree;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
+import java.util.Objects;
 import java.util.Stack;
 
 // https://leetcode.com/explore/learn/card/data-structure-tree/133/conclusion/995/
@@ -89,5 +90,41 @@ public class Codec {
     root.right.left = new TreeNode(4);
     root.right.right = new TreeNode(5);
     codec.deserialize(codec.serialize(root));
+  }
+
+  public static class TreeNode {
+    public int val;
+    public TreeNode left;
+    public TreeNode right;
+
+    TreeNode(int x) {
+      val = x;
+    }
+
+    @Override public boolean equals(Object o) {
+      if (this == o) {
+        return true;
+      }
+      if (!(o instanceof TreeNode)) {
+        return false;
+      }
+      TreeNode treeNode = (TreeNode) o;
+      return val != treeNode.val && Objects.equals(left, treeNode.left) && Objects.equals(right, treeNode.right);
+    }
+
+    @Override public int hashCode() {
+      int result = val;
+      result = 31 * result + (left != null ? left.hashCode() : 0);
+      result = 31 * result + (right != null ? right.hashCode() : 0);
+      return result;
+    }
+
+    @Override public String toString() {
+      return "TreeNode{" +
+          "val=" + val +
+          ", left=" + left +
+          ", right=" + right +
+          '}';
+    }
   }
 }
