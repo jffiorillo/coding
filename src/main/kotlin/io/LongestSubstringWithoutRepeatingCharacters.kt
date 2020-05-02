@@ -1,5 +1,7 @@
 package io
 
+import io.utils.runTests
+
 //http://blog.gainlo.co/index.php/2016/10/07/facebook-interview-longest-substring-without-repeating-characters/
 
 class LongestSubstringWithoutRepeatingCharacters {
@@ -35,10 +37,11 @@ class LongestSubstringWithoutRepeatingCharacters {
 }
 
 fun main() {
-  LongestSubstringWithoutRepeatingCharacters().let { action ->
-    listOf("abccdefgh", "abcadbef", "abac", "aaaaaa","abcdefghijklmnocqrt").forEach { value ->
-      val execute = action.execute(value)
-      println("Example: '$value' output: $execute size ${execute.length}")
-    }
-  }
+  runTests(listOf(
+      "abccdefgh" to 3,
+      "abcadbef" to 3,
+      "abac" to 3,
+      "aaaaaa" to 4,
+      "abcdefghijklmnocqrt" to 3
+  )) { (input, value) -> value to LongestSubstringWithoutRepeatingCharacters().execute(input) }
 }

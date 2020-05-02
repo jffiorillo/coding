@@ -5,21 +5,21 @@ import io.utils.runTests
 // https://leetcode.com/problems/longest-substring-without-repeating-characters/
 class LongestSubstringWithoutRepeatingChars {
 
+  // https://leetcode.com/problems/subarrays-with-k-different-integers/discuss/235235/C%2B%2BJava-with-picture-prefixed-sliding-window
   fun execute(input: String): Int {
-    var first = 0
     var current = 0
+    var first = 0
     var max = 0
-    var map = mutableMapOf<Char, Int>()
+    val map = mutableMapOf<Char, Int>()
     while (current < input.length) {
-      if (map.containsKey(input[current])) {
-        first = map.getValue(input[current]) + 1
-        map = (first until current).map { input[it] to it }.toMap().toMutableMap()
+      val value = input[current]
+      if (map.containsKey(value)) {
+        first = maxOf(map.getValue(value) + 1, first)
       }
-      map[input[current]] = current
+      map[value] = current
       max = maxOf(max, current - first + 1)
       current++
     }
-
     return max
   }
 }
