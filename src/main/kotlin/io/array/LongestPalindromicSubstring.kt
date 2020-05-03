@@ -4,42 +4,37 @@ import io.utils.runTests
 
 class LongestPalindromicSubstring {
 
-  fun executeManacher(input: String): String {
-    if (input.isEmpty()) return ""
-    val preprocessManacher = preprocessManacher(input)
-    val weights = IntArray(preprocessManacher.length) { 0 }
+  fun executeManacher(rawInput: String): String {
+    if (rawInput.isEmpty()) return ""
+    val inputManacher = preprocessManacher(rawInput)
+    val weights = IntArray(inputManacher.length) { 0 }
 
     var center = 0
     var rightBoundary = 0
-    (1 until preprocessManacher.length - 1).forEach { index ->
+    (1 until inputManacher.lastIndex).forEach { index ->
       val mirror = 2 * center - index
       if (index < rightBoundary)
         weights[index] = minOf(rightBoundary - index, weights[mirror])
 
-      while (preprocessManacher[index + (1 + weights[index])] == preprocessManacher[index - (1 + weights[index])]) {
+      while (inputManacher[index + (1 + weights[index])] == inputManacher[index - (1 + weights[index])]) {
         weights[index]++
       }
 
       if (index + weights[index] > rightBoundary) {
-        rightBoundary = index + weights[index]
         center = index
+        rightBoundary = index + weights[index]
       }
     }
 
-    return cleanSolution(preprocessManacher, weights)
+    return cleanSolution(inputManacher, weights)
   }
 
-  private fun cleanSolution(input: String, weights: IntArray) =
-      weights
-          .foldIndexed(0 to 0) { index, (center, size), value ->
-            if (value > size) {
-              index to value
-            } else center to size
-          }.let { (center, size) -> input.substring(center - size..center + size).replace("#", "") }
+  private fun cleanSolution(input: String, weights: IntArray) = weights.foldIndexed(0 to 0) { index, (center, size), value ->
+    if (value > size) { index to value } else center to size
+  }.let { (center, size) -> input.substring(center - size..center + size).replace("#", "") }
 
   private fun preprocessManacher(input: String) = "^$input$".toList().joinToString(separator = "#") { it.toString() }
-
-  fun execute(input: String): String = when (input.length) {
+  fun execute1(input: String): String = when (input.length) {
     0, 1 -> input
     else -> {
 
@@ -80,17 +75,17 @@ class LongestPalindromicSubstring {
     }
   }
 
+}
 
-  fun String.isPalindrome(f: Int, l: Int): Boolean {
-    if (f !in indices || l !in indices) return false
-    var first = f
-    var last = l
-    while (first < length && last >= 0 && first < last && this[first] == this[last]) {
-      first++
-      last--
-    }
-    return first >= last
+private fun String.isPalindrome(f: Int, l: Int): Boolean {
+  if (f !in indices || l !in indices) return false
+  var first = f
+  var last = l
+  while (first < length && last >= 0 && first < last && this[first] == this[last]) {
+    first++
+    last--
   }
+  return first >= last
 }
 
 fun main() {
