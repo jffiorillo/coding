@@ -3,10 +3,12 @@ package io.linkedlist
 import io.models.ListNode
 import io.utils.runTests
 
+
 // https://leetcode.com/problems/add-two-numbers/
+@Suppress("DuplicatedCode")
 class AddTwoNumbers {
 
-  fun execute(l0: ListNode?, l1: ListNode?): ListNode? {
+  fun execute1(l0: ListNode?, l1: ListNode?): ListNode? {
     var current0 = l0
     var current1 = l1
     var result: ListNode? = null
@@ -35,12 +37,10 @@ class AddTwoNumbers {
       accum = accum0
       result = result0
     }
-//    if (accum != 0)
-//      result = update(result, ListNode(accum), 0).second
     return result
   }
 
-  fun update(result: ListNode?, rest: ListNode?, accum0: Int): Pair<Int, ListNode?> {
+  private fun update(result: ListNode?, rest: ListNode?, accum0: Int): Pair<Int, ListNode?> {
     var currentResult = result
     var lastResult = currentResult
     while (lastResult?.next != null) {
@@ -62,6 +62,27 @@ class AddTwoNumbers {
       current = current.next
     }
     return accum to currentResult
+  }
+
+  fun execute(l1: ListNode?, l2: ListNode?): ListNode? = ListNode(0).let { sentinel ->
+    var c1 = l1
+    var c2 = l2
+    var lastSumNode = sentinel
+    var sum = 0
+    while (c1 != null || c2 != null) {
+      sum /= 10
+      c1?.also {
+        sum += it.`val`
+        c1 = it.next
+      }
+      c2?.also {
+        sum += it.`val`
+        c2 = it.next
+      }
+      lastSumNode.next = ListNode(sum % 10).also { lastSumNode = it }
+    }
+    if (sum / 10 == 1) lastSumNode.next = ListNode(1)
+    sentinel.next
   }
 }
 
