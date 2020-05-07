@@ -10,18 +10,19 @@ class TrappingRainWater {
     var start = 0
     var end = heights.lastIndex
     var max = 0
-    var leftmax = 0
-    var rightmax = 0
+    var leftMax = 0
+    var rightMax = 0
     while (start <= end) {
-      leftmax = maxOf(leftmax, heights[start])
-      rightmax = maxOf(rightmax, heights[end])
+      leftMax = maxOf(leftMax, heights[start])
+      rightMax = maxOf(rightMax, heights[end])
       when {
-        leftmax < rightmax -> {
-          max += leftmax - heights[start] // leftmax is smaller than rightmax, so the (leftmax-A[a]) water can be stored
+        leftMax < rightMax -> {
+          // leftMax is smaller than rightMax, so the (leftmax-A[a]) water can be stored
+          max += leftMax - heights[start]
           start++
         }
         else -> {
-          max += rightmax - heights[end]
+          max += rightMax - heights[end]
           end--
         }
       }
@@ -67,6 +68,7 @@ class TrappingRainWater {
       (minHeight until maxHeight).forEach { col -> result.add(row to col) }
     }
   }
+
   private fun removeInvalidTowers(towers: MutableList<Pair<Int, Int>>, value: Int) {
     val indexToRemove = mutableListOf<Int>()
     for (index in towers.lastIndex downTo 0) {
@@ -85,6 +87,6 @@ fun main() {
       intArrayOf(0, 1, 0, 2, 1, 0, 1, 3, 2, 1, 2, 1) to 6,
       intArrayOf(2, 0, 2) to 2,
       intArrayOf(0, 3, 0, 2, 1, 0, 1, 3, 2, 1, 2, 1) to 12,
-      intArrayOf(4,1,3,0,1,0,2,7) to 17
+      intArrayOf(4, 1, 3, 0, 1, 0, 2, 7) to 17
   )) { (input, value) -> value to TrappingRainWater().execute(input) }
 }
