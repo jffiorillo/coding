@@ -1,4 +1,4 @@
-package io.math
+package io.permutation
 
 import io.utils.runTests
 

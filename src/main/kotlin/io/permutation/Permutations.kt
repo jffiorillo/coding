@@ -1,4 +1,4 @@
-package io.recursion
+package io.permutation
 
 //https://leetcode.com/explore/learn/card/recursion-ii/507/beyond-recursion/2903/
 class Permutations {
