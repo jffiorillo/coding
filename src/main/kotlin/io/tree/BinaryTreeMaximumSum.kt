@@ -4,6 +4,7 @@ import io.models.TreeNode
 import io.utils.runTests
 
 // https://leetcode.com/explore/featured/card/30-day-leetcoding-challenge/532/week-5/3314/
+// https://leetcode.com/problems/binary-tree-maximum-path-sum/
 class BinaryTreeMaximumSum {
 
   var maxSum = Int.MIN_VALUE
@@ -23,7 +24,6 @@ class BinaryTreeMaximumSum {
       maxOf(left, right) + current
     }
   }
-
 }
 
 fun main() {
