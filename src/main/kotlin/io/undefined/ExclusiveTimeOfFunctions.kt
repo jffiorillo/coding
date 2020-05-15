@@ -12,13 +12,17 @@ class ExclusiveTimeOfFunctions {
     val logsTriple = logs.toTriple()
     val result = IntArray(n)
     val stack = LinkedList<Int>()
-    var previousTime = 0
+    // startInterval means the start of the interval
+    var startInterval = 0
     logsTriple.forEach { (id, action, timestamp) ->
-      if (stack.isNotEmpty()) result[stack.peek()] += timestamp - previousTime
-      previousTime = timestamp
+      if (stack.isNotEmpty()) result[stack.peek()] += timestamp - startInterval
+      startInterval = timestamp
       when (action) {
+        // timestamp is the start of the next interval, doesn't belong to the current interval.
         "start" -> stack.push(id)
-        "end" -> result[stack.pop()]++.also { previousTime++ }
+        // timestamp is the end of the current interval, belong to the current interval.
+        // That's why result[stack.pop()]++ and startInterval++
+        "end" -> result[stack.pop()]++.also { startInterval++ }
       }
     }
     return result
