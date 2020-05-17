@@ -1,4 +1,4 @@
-package io.undefined
+package io.intervals
 
 import io.utils.runTests
 import java.util.*
