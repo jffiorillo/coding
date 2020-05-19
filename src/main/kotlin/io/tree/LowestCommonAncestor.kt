@@ -1,6 +1,9 @@
 package io.tree
 
-//https://leetcode.com/explore/learn/card/data-structure-tree/133/conclusion/932/
+import io.models.TreeNode
+
+// https://leetcode.com/explore/learn/card/data-structure-tree/133/conclusion/932/
+// https://leetcode.com/problems/lowest-common-ancestor-of-a-binary-search-tree/
 class LowestCommonAncestor {
 
   fun <T> execute(root: BinaryTree<T>?, p: T, q: T): BinaryTree<T>? = when {
@@ -12,6 +15,16 @@ class LowestCommonAncestor {
       if (left != null && right != null) {
         root
       } else left ?: right
+    }
+  }
+
+  fun execute(root: TreeNode?, p: TreeNode?, q: TreeNode?): TreeNode? = when {
+    root == null -> null
+    root == p || root == q -> root
+    else -> {
+      val left = execute(root.left, p, q)
+      val right = execute(root.right, p, q)
+      if (left != null && right != null) root else left ?: right
     }
   }
 }
