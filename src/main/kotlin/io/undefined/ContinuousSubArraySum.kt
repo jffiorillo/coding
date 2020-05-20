@@ -26,6 +26,7 @@ fun main() {
       Triple(intArrayOf(1, 2, 12), 6, false),
       Triple(intArrayOf(1, 0, 1, 0, 1), 4, false),
       Triple(intArrayOf(0, 0), -1, true),
-      Triple(intArrayOf(1, 1), 2, true)
+      Triple(intArrayOf(1, 1), 2, true),
+      Triple(intArrayOf(23, 2, 4, 3, 1), 6, true)
   )) { (input, k, value) -> value to ContinuousSubArraySum().execute(input, k) }
 }
