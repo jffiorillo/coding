@@ -18,15 +18,13 @@ class PerfectSquares {
           when {
             current - squareNumber == 0 -> return steps
             current - squareNumber < 0 -> null
-            else -> {
-              current - squareNumber
-            }
+            else -> current - squareNumber
           }
         }.filterNotNull()
       }.let { newGeneration ->
         if (newGeneration.isNotEmpty()) stack.push(newGeneration)
       }
-      steps +=1
+      steps += 1
     }
     return -1
   }
