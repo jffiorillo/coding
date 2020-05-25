@@ -38,12 +38,11 @@ class SkylineProblem {
 
   data class BuildingPoint(val x: Int, val height: Int, val type: BuildingPointType) : Comparable<BuildingPoint> {
     fun toList() = listOf(x, height)
+    private fun getComparableValue() = if (this.type == BuildingPointType.BEGIN) -this.height else this.height
     override fun compareTo(other: BuildingPoint): Int =
-        if (this.x != other.x) {
-          this.x - other.x
-        } else {
-          (if (this.type == BuildingPointType.BEGIN) -this.height else this.height) -
-              (if (other.type == BuildingPointType.BEGIN) -other.height else other.height)
+        when {
+          this.x != other.x -> this.x - other.x
+          else -> getComparableValue() - other.getComparableValue()
         }
   }
 
