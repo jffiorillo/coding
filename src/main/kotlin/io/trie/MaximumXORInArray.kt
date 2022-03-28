@@ -8,7 +8,7 @@ class MaximumXORInArray {
 
   fun executeInefficient(nums: IntArray): Int =
       nums.foldIndexed(0) { index, acc, value ->
-        maxOf(acc, (index + 1 until nums.size).map { j -> nums[j].xor(value) }.max() ?: Integer.MIN_VALUE)
+        maxOf(acc, (index + 1 until nums.size).map { j -> nums[j].xor(value) }.maxOrNull() ?: Integer.MIN_VALUE)
       }
 
   internal data class TrieNode(var left: TrieNode? = null, var right: TrieNode? = null) {

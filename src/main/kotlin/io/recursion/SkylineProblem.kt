@@ -19,7 +19,7 @@ class SkylineProblem {
         }
         BuildingPointType.END -> {
           currentArea.remove(element.height)
-          val newCurrentAreaMax = currentArea.max() ?: 0
+          val newCurrentAreaMax = currentArea.maxOrNull() ?: 0
           if (newCurrentAreaMax != currentAreaMax) {
             currentAreaMax = newCurrentAreaMax
             result.add(listOf(element.x, currentAreaMax))

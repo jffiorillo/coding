@@ -22,7 +22,7 @@ class ShortestUnsortedSubArray {
   private fun minElementInBrokenArray(input: IntArray): Int? {
     for (x in 0 until input.size - 1) {
       if (input[x + 1] < input[x]) {
-        return input.slice(x until input.size).min()!!
+        return input.slice(x until input.size).minOrNull()!!
       }
     }
     return null
@@ -31,7 +31,7 @@ class ShortestUnsortedSubArray {
   private fun maxElementInBrokenArray(input: IntArray): Int {
     for (x in input.size - 1 downTo 1) {
       if (input[x] < input[x - 1]) {
-        return input.slice(0 until x).max()!!
+        return input.slice(0 until x).maxOrNull()!!
       }
     }
     throw InvalidParameterException("This should never happens, broken array not found")

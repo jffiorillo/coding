@@ -20,13 +20,13 @@ class LargestRectangleArea {
   }
 
   fun execute(heights: IntArray): Int = when {
-    heights.max() == null || heights.max() == 0 -> 0
-    heights.max() == Int.MAX_VALUE -> Int.MAX_VALUE
+    heights.maxOrNull() == null || heights.maxOrNull() == 0 -> 0
+    heights.maxOrNull() == Int.MAX_VALUE -> Int.MAX_VALUE
     heights.size == Int.MAX_VALUE -> Int.MAX_VALUE
     heights.size == 1 -> heights.first()
     else -> {
-      var max = heights.max()!!
-      var height = heights.min()!!
+      var max = heights.maxOrNull()!!
+      var height = heights.minOrNull()!!
       while (height != Int.MIN_VALUE) {
         val current = heights.fold(Helper(0, 0)) { acc, item ->
           acc.apply {
@@ -37,7 +37,7 @@ class LargestRectangleArea {
           }
         }.reset().maxSize * height
         max = maxOf(max, current)
-        height = heights.filter { it > height }.min() ?: Int.MIN_VALUE
+        height = heights.filter { it > height }.minOrNull() ?: Int.MIN_VALUE
       }
       max
     }

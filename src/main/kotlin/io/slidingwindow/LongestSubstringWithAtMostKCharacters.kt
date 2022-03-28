@@ -14,7 +14,7 @@ class LongestSubstringWithAtMostKCharacters {
       counts[input[end]] = end
       when {
         counts.keys.size > k -> {
-          val (key, value) = counts.entries.minBy { (_, value) -> value }!!
+          val (key, value) = counts.entries.minByOrNull { (_, value) -> value }!!
           counts.remove(key)
           start = value + 1
         }

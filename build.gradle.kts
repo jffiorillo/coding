@@ -1,17 +1,18 @@
 import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 
 plugins {
-  kotlin("jvm") version "1.3.71"
+  kotlin("jvm") version "1.6.10"
 }
 
 dependencies {
-  testCompile("junit:junit:4.12")
+  testImplementation("junit:junit:4.13.2")
   implementation(kotlin("stdlib-jdk8"))
-  implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:1.3.3")
+  implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:1.6.0")
 }
 
 repositories {
   jcenter()
+  mavenCentral()
 }
 
 tasks.withType<KotlinCompile> {

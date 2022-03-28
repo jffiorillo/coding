@@ -59,7 +59,7 @@ private fun updateSuggestions(root: AutocompleteSearch.TreeNode, suggestion: Aut
 
 
 private fun MutableList<AutocompleteSearch.Suggestion>.updateSuggestions(suggestion: AutocompleteSearch.Suggestion) =
-    this.minBy { it.weight }?.let { minSuggestion ->
+    this.minByOrNull { it.weight }?.let { minSuggestion ->
       when {
         this.contains(suggestion) -> false.also { this.sort() }
         this.size < 3 -> this.add(suggestion).also { this.sort() }

@@ -1,11 +1,12 @@
 package io.tree;
 
 import io.queue.Node;
+import kotlin.Pair;
+
 import java.util.Collections;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.stream.Collectors;
-import javafx.util.Pair;
 
 // https://leetcode.com/explore/learn/card/n-ary-tree/131/recursion/919/
 class MaximumDepthNTree {
@@ -18,11 +19,11 @@ class MaximumDepthNTree {
     int deep = 0;
     while (!stack.isEmpty()) {
       final Pair<Node, Integer> current = stack.pop();
-      final Integer value = current.getValue();
+      final Integer value = current.component2();
       if (value > deep) {
         deep = value;
       }
-      for (Node child : current.getKey().neighbors) {
+      for (Node child : current.component1().neighbors) {
         stack.add(new Pair<>(child, value + 1));
       }
     }

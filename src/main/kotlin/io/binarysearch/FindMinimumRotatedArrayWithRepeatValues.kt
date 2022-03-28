@@ -5,7 +5,7 @@ class FindMinimumRotatedArrayWithRepeatValues {
 
   fun execute(input: IntArray): Int = when {
     input.isEmpty() -> -1
-    input.size <= 2 -> input.min()!!
+    input.size <= 2 -> input.minOrNull()!!
     else -> {
       var start = 0
       var end = input.size - 1
@@ -32,7 +32,7 @@ fun main() {
 //      intArrayOf(1, 1, 1),
       intArrayOf(10, 10, 10, 1)
   ).map { input ->
-    val output = input.min()!!
+    val output = input.minOrNull()!!
     val result = findMinimumRotatedArrayII.execute(input)
     if (result == output) {
       println("${input.toList()} is valid")

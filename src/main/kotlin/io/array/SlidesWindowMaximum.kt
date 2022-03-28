@@ -5,7 +5,7 @@ class SlidesWindowMaximum {
 
   fun execute(nums: IntArray, k: Int): IntArray = when (k) {
     1 -> nums
-    else -> (0..nums.size - k).map { nums.slice(it until it+k).max()!! }.toIntArray()
+    else -> (0..nums.size - k).map { nums.slice(it until it+k).maxOrNull()!! }.toIntArray()
   }
 }
 

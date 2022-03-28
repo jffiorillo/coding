@@ -9,7 +9,7 @@ class MinimumIndexSum {
   fun execute(list0: Array<String>, list1: Array<String>): Array<String> {
     val sumIndexes = list0.mapIndexed { index, value -> index to value }.filter { list1.contains(it.second) }
         .map { (index, value) -> value to (index + list1.indexOf(value)) }
-    val (_, min) = sumIndexes.minBy { it.second }!!
+    val (_, min) = sumIndexes.minByOrNull { it.second }!!
     return sumIndexes.filter { it.second == min }.map { it.first }.toTypedArray()
   }
 

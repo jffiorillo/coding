@@ -30,6 +30,6 @@ fun main() {
           intArrayOf(0, 1, 0, 1),
           intArrayOf(0, 0, 0, 0))
           to listOf(Pair(0, 0), Pair(1, 0), Pair(2, 0), Pair(3, 0), Pair(4, 0), Pair(4, 1), Pair(4, 2), Pair(4, 3)),
-      arrayOf(intArrayOf()) to null
+      arrayOf(intArrayOf()) to listOf()
   )) { (input, value) -> value to RobotInAGrid().execute(input) }
 }
