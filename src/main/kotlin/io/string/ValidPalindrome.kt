@@ -6,7 +6,7 @@ import io.utils.runTests
 class ValidPalindrome {
 
   fun execute(input: String): Boolean {
-    val cleanInput = input.toLowerCase().replace("[^a-z0-9]".toRegex(), "")
+    val cleanInput = input.lowercase().replace("[^a-z0-9]".toRegex(), "")
     var start = 0
     var end = cleanInput.lastIndex
     while (start < end) {

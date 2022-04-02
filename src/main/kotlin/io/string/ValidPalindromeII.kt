@@ -5,10 +5,12 @@ import io.utils.runTests
 // https://leetcode.com/problems/valid-palindrome-ii/
 class ValidPalindromeII {
 
-  fun execute(input: String,
-              start: Int = 0,
-              end: Int = input.lastIndex,
-              hasRemoved: Boolean = false): Boolean = when {
+  fun execute(
+    input: String,
+    start: Int = 0,
+    end: Int = input.lastIndex,
+    hasRemoved: Boolean = false
+  ): Boolean = when {
     start >= end -> true
     input[start] != input[end] && hasRemoved -> false
     input[start] != input[end] -> execute(input, start + 1, end, true) || execute(input, start, end - 1, true)
@@ -17,8 +19,18 @@ class ValidPalindromeII {
 }
 
 fun main() {
-  runTests(listOf(
+  runTests(
+    listOf(
       "aba" to true,
-      "abca" to true
-  )) { (input, value) -> value to ValidPalindromeII().execute(input) }
+      "abca" to true,
+      "tacocats" to true,
+      "racercar" to true,
+      "kbayak" to true,
+      "acbccba" to true,
+      "abccbca" to true,
+      "acbd" to false,
+      "btnnure" to false,
+      "abbab" to true
+    )
+  ) { (input, value) -> value to ValidPalindromeII().execute(input) }
 }

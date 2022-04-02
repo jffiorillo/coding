@@ -1,6 +1,6 @@
 package io.undefined
 
-import io.undefined.IsBalanceParentheses.*
+import io.undefined.IsBalanceParentheses.Parameter
 
 class IsBalanceParentheses {
 
@@ -81,16 +81,16 @@ class IsBalanceParentheses {
     return temp.asReversed().map { value ->
       if (debug) println("checking $value")
       when (value) {
-        ')' -> value.also{countExtraParentheses++}
-        '(' -> if (countExtraParentheses == 0) '*'.also { if (debug) println("balanceBackAndForth: second round: removing $value in $temp")} else value.also {countExtraParentheses--}
+        ')' -> value.also { countExtraParentheses++ }
+        '(' -> if (countExtraParentheses == 0) '*'.also { if (debug) println("balanceBackAndForth: second round: removing $value in $temp") } else value.also { countExtraParentheses-- }
         else -> value
       }
-    }.asReversed().fold(""){ acc, value -> if (value == '*') acc else acc + value }
+    }.asReversed().fold("") { acc, value -> if (value == '*') acc else acc + value }
   }
 
 }
 
-fun main(){
+fun main() {
   listOf(
     Parameter("()", "()", "()", "()"),
     Parameter("a(b)c)", "a(b)c", "a(b)c", "a(b)c"),

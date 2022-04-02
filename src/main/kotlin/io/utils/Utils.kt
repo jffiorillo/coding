@@ -18,3 +18,7 @@ fun <INPUT, VALUE, OUTPUT> runTests(
 
   }
 }
+
+fun printlnIfDebug(string: String, debug:Boolean) {
+  if (debug) println(string)
+}
